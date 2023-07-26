@@ -4,7 +4,7 @@
 		"typescript": "^5.1.6"
 	},
 	"name": "cords-distance",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"scripts": {
 		"dev": "npm-ez dev",
 		"build": "npm-ez build"

@@ -16,7 +16,7 @@ export default function cordsDistance(cords1: Options, cords2: Options) {
   const location1 = { ...defaultOptions, ...cords1 }
   const location2 = { ...defaultOptions, ...cords2 }
 
-  const R = 6371 // Radius of the Earth in kilometers
+  const R = 6371000 // Radius of the Earth in meters
 
   const lat1Rad = (location1.latitude * Math.PI) / 180
   const lon1Rad = (location1.longitude * Math.PI) / 180
@@ -44,19 +44,15 @@ export default function cordsDistance(cords1: Options, cords2: Options) {
 
   // Calculate the minimum and maximum possible distances based on accuracy
   const minDistance =
-    horizontalDistance - location1.accuracy / 1000 - location2.accuracy / 1000
+    horizontalDistance - location1.accuracy - location2.accuracy
   const maxDistance =
-    horizontalDistance + location1.accuracy / 1000 + location2.accuracy / 1000
+    horizontalDistance + location1.accuracy + location2.accuracy
 
   // Calculate the minimum and maximum possible altitude differences based on altitudeAccuracy
   const minAltitudeDiff =
-    altitudeDiff -
-    location1.altitudeAccuracy / 1000 -
-    location2.altitudeAccuracy / 1000
+    altitudeDiff - location1.altitudeAccuracy - location2.altitudeAccuracy
   const maxAltitudeDiff =
-    altitudeDiff +
-    location1.altitudeAccuracy / 1000 +
-    location2.altitudeAccuracy / 1000
+    altitudeDiff + location1.altitudeAccuracy + location2.altitudeAccuracy
 
   // Calculate the total minimum and maximum possible distances
   const min = Math.sqrt(minDistance ** 2 + minAltitudeDiff ** 2)
